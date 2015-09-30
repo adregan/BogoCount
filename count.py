@@ -2,6 +2,7 @@ import random
 import time
 import redis
 from collections import defaultdict
+import logging
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 pipe = r.pipeline()
@@ -38,6 +39,11 @@ try:
             ).incrby(
                 'totalAttempts', attempts
             ).execute()
+
+            logging.info(
+                'Successfully counted to {} after {} attempts'
+                .format(count_to, attempts)
+            )
 
             start_time = time.time()
             attempts = 0
