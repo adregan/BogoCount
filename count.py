@@ -39,10 +39,8 @@ try:
                 'totalAttempts', attempts
             ).execute()
 
-            print('Successfully counted to {} after {} attempts'.format(count_to, attempts))
             start_time = time.time()
             attempts = 0
-
 
 except KeyboardInterrupt:
     pass
