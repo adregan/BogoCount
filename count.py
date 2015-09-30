@@ -21,9 +21,6 @@ try:
             succefully_counted_to[str(next_number)] += 1
         else:
             attempts += 1
-            if current_count > 6:
-                print('failed on {} attempt #{}. Got {} wanted {}'.format(current_count, attempts, next_number, current_count + 1))
-            # r.incr('currentAttempts')
             current_count = 0
 
         if current_count == count_to:
