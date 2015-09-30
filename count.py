@@ -12,32 +12,37 @@ attempts = 0
 count_to = 10
 succefully_counted_to = defaultdict(int)
 
-while True:
-    next_number = random.randint(1, count_to)
+try:
+    while True:
+        next_number = random.randint(1, count_to)
 
-    if current_count + 1 == next_number:
-        current_count = next_number
-        pipe.incr(str(next_number))
-    else:
-        attempts += 1
-        if current_count > 6:
-            print('failed on attempt #{}'.format(attempts))
-        # r.incr('currentAttempts')
-        current_count = 0
+        if current_count + 1 == next_number:
+            current_count = next_number
+            succefully_counted_to[str(next_number)] += 1
+        else:
+            attempts += 1
+            if current_count > 6:
+                print('failed on {} attempt #{}. Got {} wanted {}'.format(current_count, attempts, next_number, current_count + 1))
+            # r.incr('currentAttempts')
+            current_count = 0
 
-    if current_count == count_to:
-        total_seconds = time.time() - start_time
-        pipe.rpush(
-            'successfulAfterAttempts', attempts
-        ).rpush(
-            'successfulTimeTaken', total_seconds
-        ).set(
-            'currentAttempts', 0
-        ).incrby(
-            'totalAttempts', attempts
-        ).execute()
+        if current_count == count_to:
+            total_seconds = time.time() - start_time
 
-        print('Successfully counted to {} after {} attempts'.format(count_to, attempts))
+            pipe.rpush(
+                'successfulAfterAttempts', attempts
+            ).rpush(
+                'successfulTimeTaken', total_seconds
+            ).set(
+                'currentAttempts', 0
+            ).incrby(
+                'totalAttempts', attempts
+            ).execute()
 
-        start_time = time.time()
-        attempts = 0
+            print('Successfully counted to {} after {} attempts'.format(count_to, attempts))
+            start_time = time.time()
+            attempts = 0
+
+
+except KeyboardInterrupt:
+    pass
