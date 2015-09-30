@@ -1,6 +1,7 @@
 import random
 import time
 import redis
+from collections import defaultdict
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 pipe = r.pipeline()
@@ -9,6 +10,7 @@ start_time = time.time()
 current_count = 0
 attempts = 0
 count_to = 10
+succefully_counted_to = defaultdict(int)
 
 while True:
     next_number = random.randint(1, count_to)
