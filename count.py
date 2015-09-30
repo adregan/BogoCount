@@ -27,7 +27,7 @@ try:
             total_seconds = time.time() - start_time
 
             for number, count in succefully_counted_to.items():
-                pipe.hincrby('number', count)
+                pipe.hincrby('successfullyCountedTo', number, count)
 
             pipe.rpush(
                 'successfulAfterAttempts', attempts
