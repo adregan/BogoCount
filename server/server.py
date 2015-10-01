@@ -20,7 +20,7 @@ class App(Application):
     def __init__(self):
         handlers = [
             url(r"/?$", MainHandler),
-            url(r"/websocket?$", WebSocket)
+            url(r"/websocket/?$", WebSocket)
         ]
 
         settings = {

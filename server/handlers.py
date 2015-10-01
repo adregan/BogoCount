@@ -77,6 +77,8 @@ class MainHandler(tornado.web.RequestHandler):
         return list_of_data, avg_of_list
 
 class WebSocket(tornado.websocket.WebSocketHandler):
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
 
     def open(self):
         print("WebSocket opened")
