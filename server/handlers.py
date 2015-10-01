@@ -19,13 +19,14 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         total_attempts = int(self.redis.get('totalAttempts'))
 
-        attemps_until_success, avg_attempts_until_success = self._fetch_lists_and_compute_avg(
-            'successfulAfterAttempts')
+        attemps_until_success, avg_attempts_until_success = (
+            self._fetch_lists_and_compute_avg('successfulAfterAttempts'))
 
-        time_until_success, avg_time_until_success = self._fetch_lists_and_compute_avg(
-            'successfulTimeTaken')
+        time_until_success, avg_time_until_success = (
+            self._fetch_lists_and_compute_avg('successfulTimeTaken'))
 
-        times_successfully_counted_to = self._convert_hash_to_dict('successfullyCountedTo')
+        times_successfully_counted_to = (
+            self._convert_hash_to_dict('successfullyCountedTo'))
 
         self.write('hi')
 
