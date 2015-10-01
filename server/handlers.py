@@ -21,7 +21,12 @@ class MainHandler(tornado.web.RequestHandler):
         self.set_header('Content-Type', 'application/json')
 
     def get(self):
-        total_attempts = int(self.redis.get('totalAttempts'))
+        try:
+            total_attempts = int(self.redis.get('totalAttempts'))
+        except TypeError:
+            # Total attempts doesn't exist
+            self.write({})
+            return
 
         attemps_until_success, avg_attempts_until_success = (
             self._fetch_lists_and_compute_avg('successfulAfterAttempts'))
