@@ -40,6 +40,8 @@ try:
                 'totalAttempts', attempts
             ).execute()
 
+            r.save()
+
             r.publish('success', True)
 
             start_time = time.time()
