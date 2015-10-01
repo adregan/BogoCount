@@ -37,7 +37,16 @@ class MainHandler(tornado.web.RequestHandler):
         times_successfully_counted_to = (
             self._convert_hash_to_dict('successfullyCountedTo'))
 
-        self.write('hi')
+        api_resp = {
+            'totalAttempts': total_attempts,
+            'avgAttemptsForSuccess': avg_attempts_until_success,
+            'avgTimeForSuccess': avg_time_until_success,
+            'timesSuccessfullyCountedTo': times_successfully_counted_to,
+            'attemptsUntilSuccess': attemps_until_success,
+            'timeUntilSuccess': time_until_success
+        }
+
+        self.write(api_resp)
 
     def _convert_hash_to_dict(self, redis_field):
         data = self.redis.hgetall(redis_field)
