@@ -16,6 +16,10 @@ class MainHandler(tornado.web.RequestHandler):
     def redis(self):
         return self.application.r
 
+    def set_default_headers(self):
+        self.set_header('Access-Control-Allow-Origin', '*')
+        self.set_header('Content-Type', 'application/json')
+
     def get(self):
         total_attempts = int(self.redis.get('totalAttempts'))
 
