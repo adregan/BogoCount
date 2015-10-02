@@ -19,7 +19,7 @@ define('conf', default='/etc/count_server.conf', help='File path to the conf', t
 class App(Application):
     def __init__(self):
         handlers = [
-            url(r"/?$", MainHandler),
+            url(r"/([\w]+)/?$", MainHandler),
             url(r"/websocket/?$", WebSocket)
         ]
 
