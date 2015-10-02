@@ -27,10 +27,16 @@ class App(Application):
             'debug': options.dev,
         }
 
-        self.r = redis.StrictRedis(
+        self.count = redis.StrictRedis(
             host=options.redis_host,
             port=options.redis_port,
             db=0
+        )
+
+        self.hat = redis.StrictRedis(
+            host=options.redis_host,
+            port=options.redis_port,
+            db=1
         )
 
         tornado.web.Application.__init__(self, handlers, **settings)
