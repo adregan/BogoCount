@@ -13,14 +13,22 @@ from functools import reduce
 class MainHandler(tornado.web.RequestHandler):
 
     @property
-    def redis(self):
-        return self.application.r
+    def count(self):
+        return self.application.count
+
+    @property
+    def hat(self):
+        return self.application.hat
 
     def set_default_headers(self):
         self.set_header('Access-Control-Allow-Origin', '*')
         self.set_header('Content-Type', 'application/json')
 
-    def get(self):
+    def get(self, count_type):
+        if count_type == 'count':
+            self.redis = self.count
+        else:
+            self.redis = self.hat
         try:
             total_attempts = int(self.redis.get('totalAttempts'))
         except TypeError:
