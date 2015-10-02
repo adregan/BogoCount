@@ -49,9 +49,7 @@ class MainHandler(tornado.web.RequestHandler):
             'totalAttempts': total_attempts,
             'avgAttemptsForSuccess': avg_attempts_until_success,
             'avgTimeForSuccess': avg_time_until_success,
-            'timesSuccessfullyCountedTo': times_successfully_counted_to,
-            'attemptsUntilSuccess': attemps_until_success,
-            'timeUntilSuccess': time_until_success
+            'timesSuccessfullyCountedTo': times_successfully_counted_to
         }
 
         self.write(api_resp)
