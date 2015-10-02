@@ -15,14 +15,14 @@ succefully_counted_to = defaultdict(int)
 
 try:
     while True:
-        next_number = random.randint(current_count + 1, count_to)
+        smallest_in_hat = current_count + 1
+        
+        next_number = random.randint(smallest_in_hat, count_to)
 
         if current_count + 1 == next_number:
             current_count = next_number
             succefully_counted_to[str(next_number)] += 1
         else:
-            if current_count > 6:
-                print('failed on attempt {}'.format(attempts))
             attempts += 1
             current_count = 0
 
