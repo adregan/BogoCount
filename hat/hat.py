@@ -48,6 +48,7 @@ try:
 
             start_time = time.time()
             attempts = 0
+            current_count = 0
 
 except KeyboardInterrupt:
     pass
